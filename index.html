@@ -1,195 +1,527 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Klaire Manzano | Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hyacinth Klaire E. Manzano — Data clerk</title>
+<style>
+/* ===== Reset & vars ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --accent:#0891b2;
+  --accent-bg:#e0f2fe;
+  --bg:#ffffff;
+  --bg-alt:#f8fafc;
+  --text:#0f172a;
+  --text-muted:#64748b;
+  --border:#e2e8f0;
+  --grid:rgba(8,145,178,0.04);
+  --radius:8px;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --mono:'Courier New',Courier,monospace;
+  --wrap:960px;
+}
+
+.dark{
+  --accent:#22d3ee;
+  --accent-bg:#0f2937;
+  --bg:#0b1120;
+  --bg-alt:#131e33;
+  --text:#e2e8f0;
+  --text-muted:#7e8ea8;
+  --border:#1e2d45;
+  --grid:rgba(34,211,238,0.035);
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
+  transition:background .3s,color .3s;
+}
+a{color:var(--accent);text-decoration:none;transition:color .2s}
+a:hover{color:var(--text)}
+img{max-width:100%;display:block}
+.container{max-width:var(--wrap);margin:0 auto;padding:0 20px}
+
+/* ===== Nav ===== */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--bg);border-bottom:1px solid var(--border);
+  transition:background .3s;
+}
+.nav-inner{
+  max-width:var(--wrap);margin:0 auto;padding:0 20px;
+  display:flex;align-items:center;justify-content:space-between;height:56px;
+}
+.logo{font-weight:700;font-size:1.15rem;color:var(--accent);letter-spacing:-.3px}
+.nav-links{list-style:none;display:flex;gap:24px}
+.nav-links a{font-size:.88rem;color:var(--text-muted);font-weight:500}
+.nav-links a:hover{color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:16px}
+#darkToggle{
+  background:none;border:none;cursor:pointer;padding:6px;
+  color:var(--text-muted);border-radius:var(--radius);display:flex;
+  transition:color .2s;
+}
+#darkToggle:hover{color:var(--text)}
+#darkToggle svg{width:18px;height:18px;display:block}
+.hamburger{
+  display:none;background:none;border:none;cursor:pointer;
+  width:22px;height:16px;position:relative;padding:0;
+}
+.hamburger span{
+  display:block;width:100%;height:2px;background:var(--text);
+  border-radius:1px;position:absolute;left:0;
+  transition:transform .3s,opacity .3s;
+}
+.hamburger span:nth-child(1){top:0}
+.hamburger span:nth-child(2){top:7px}
+.hamburger span:nth-child(3){top:14px}
+.hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ===== Hero ===== */
+#hero{
+  min-height:90vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:80px 20px 60px;position:relative;overflow:hidden;
+}
+.grid-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(to right,var(--grid) 1px,transparent 1px),
+    linear-gradient(to bottom,var(--grid) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+.hero-content{position:relative;z-index:1;max-width:600px}
+.avatar{
+  width:88px;height:88px;border-radius:50%;
+  background:var(--accent);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 24px;font-weight:700;font-size:1.5rem;letter-spacing:1px;
+}
+#hero h1{font-size:2rem;font-weight:700;line-height:1.2;margin-bottom:6px}
+#hero .title{font-size:1.1rem;color:var(--accent);font-weight:600;margin-bottom:10px}
+#hero .tagline{font-size:.95rem;color:var(--text-muted);margin-bottom:28px}
+.hero-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;padding:12px 28px;
+  border-radius:50px;font-weight:600;font-size:.9rem;transition:all .25s;
+  font-family:var(--font);
+}
+.btn-primary{background:var(--accent);color:#fff;border:2px solid var(--accent)}
+.btn-primary:hover{background:var(--text);border-color:var(--text);color:#fff}
+.btn-outline{background:transparent;color:var(--text);border:2px solid var(--border)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ===== Sections ===== */
+section{padding:80px 0}
+section.alt{background:var(--bg-alt)}
+h2{
+  font-size:1.5rem;font-weight:700;margin-bottom:40px;
+  text-align:center;letter-spacing:-.3px;
+}
+
+/* ===== Stats ===== */
+.stats-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+}
+.stat-card{
+  text-align:center;padding:28px 16px;border:1px solid var(--border);
+  border-radius:var(--radius);
+}
+.stat-number{
+  display:block;font-family:var(--mono);font-size:2.2rem;
+  font-weight:700;color:var(--accent);line-height:1.1;margin-bottom:6px;
+}
+.stat-label{font-size:.85rem;color:var(--text-muted);text-transform:lowercase}
+
+/* ===== Skills ===== */
+.skills-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
+}
+.skill-card{
+  display:flex;align-items:center;gap:14px;
+  padding:20px;border:1px solid var(--border);border-radius:var(--radius);
+  transition:border-color .25s;
+}
+.skill-card:hover{border-color:var(--accent)}
+.skill-icon{width:28px;height:28px;color:var(--accent);flex-shrink:0}
+.skill-card span{font-weight:500;font-size:.92rem;text-align:left}
+
+/* ===== Process ===== */
+.process-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;
+}
+.step{
+  text-align:center;padding:24px 12px;position:relative;
+}
+.step-icon{width:36px;height:36px;margin:0 auto 10px;color:var(--accent)}
+.step span{display:block;font-weight:600;font-size:.95rem;color:var(--text)}
+.step-arrow{display:none}
+@media(min-width:768px){
+  .step-arrow{
+    display:flex;align-items:center;justify-content:center;
+    color:var(--text-muted);font-size:1.2rem;opacity:.4;
+  }
+}
+.step:not(:last-child)::after{
+  content:'';display:none;
+}
+@media(min-width:768px){
+  .step:not(:last-child)::after{
+    display:block;position:absolute;right:-2px;top:50%;
+    width:4px;height:4px;border-radius:50%;background:var(--border);
+  }
+}
+
+/* ===== Work ===== */
+.work-grid{display:grid;grid-template-columns:1fr;gap:16px}
+.work-card{
+  padding:28px;border:1px solid var(--border);border-radius:var(--radius);
+  background:var(--bg);transition:border-color .25s;
+}
+.work-card:hover{border-color:var(--accent)}
+.work-card h3{font-size:1.05rem;font-weight:600;margin-bottom:8px}
+.work-card p{font-size:.9rem;color:var(--text-muted);line-height:1.6;margin-bottom:14px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{
+  font-size:.78rem;padding:3px 12px;border-radius:20px;
+  background:var(--accent-bg);color:var(--accent);font-weight:500;
+}
+
+/* ===== Testimonial ===== */
+blockquote{
+  max-width:640px;margin:0 auto;padding:0 0 0 28px;
+  border-left:4px solid var(--accent);
+}
+blockquote p{font-size:1.05rem;font-style:italic;color:var(--text-muted);line-height:1.7;margin-bottom:16px}
+blockquote cite{display:block;font-style:normal;font-size:.88rem}
+blockquote cite strong{display:block;color:var(--text);font-weight:600}
+blockquote cite span{color:var(--text-muted);font-size:.82rem}
+
+/* ===== Certifications ===== */
+.cert-list{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.cert-pill{
+  font-size:.85rem;font-weight:500;padding:8px 20px;
+  border:1px solid var(--border);border-radius:50px;color:var(--text-muted);
+  transition:border-color .25s,color .25s;
+}
+.cert-pill:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ===== Contact ===== */
+.contact-intro{text-align:center;color:var(--text-muted);margin-bottom:28px;font-size:.95rem}
+.contact-links{display:flex;justify-content:center;flex-wrap:wrap;gap:16px}
+.contact-item{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 24px;border:1px solid var(--border);border-radius:var(--radius);
+  color:var(--text);font-weight:500;font-size:.9rem;transition:border-color .25s;
+}
+.contact-item svg{width:18px;height:18px;color:var(--accent);flex-shrink:0}
+.contact-item:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ===== Footer ===== */
+footer{text-align:center;padding:28px 0;border-top:1px solid var(--border);font-size:.82rem;color:var(--text-muted)}
+
+/* ===== Dark mode floating toggle (mobile) ===== */
+#darkToggleFab{
+  display:flex;position:fixed;bottom:20px;right:20px;z-index:99;
+  width:44px;height:44px;border-radius:50%;background:var(--bg);
+  border:1px solid var(--border);align-items:center;justify-content:center;
+  cursor:pointer;color:var(--text-muted);transition:all .25s;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+#darkToggleFab:hover{color:var(--accent);border-color:var(--accent)}
+#darkToggleFab svg{width:18px;height:18px;display:block}
+@media(min-width:768px){#darkToggleFab{display:none}}
+
+/* ===== Responsive ===== */
+@media(max-width:639px){
+  .nav-links{
+    position:fixed;top:56px;left:0;width:100%;
+    flex-direction:column;background:var(--bg);padding:16px 20px;gap:12px;
+    transform:translateY(-120%);transition:transform .35s;border-bottom:1px solid var(--border);
+  }
+  .nav-links.show{transform:translateY(0)}
+  .hamburger{display:block}
+  #hero h1{font-size:1.55rem}
+  .stat-number{font-size:1.8rem}
+  .process-strip{grid-template-columns:repeat(2,1fr);gap:8px}
+  .work-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .stats-grid{gap:10px}
+  .stat-card{padding:20px 10px}
+}
+@media(min-width:640px){
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+  .work-grid{grid-template-columns:repeat(2,1fr)}
+  #hero h1{font-size:2.2rem}
+  .stat-number{font-size:2.4rem}
+}
+@media(min-width:1024px){
+  .skills-grid{grid-template-columns:repeat(4,1fr)}
+  .stats-grid{grid-template-columns:repeat(3,1fr)}
+  #hero h1{font-size:2.5rem}
+}
+
+/* ===== AOS fade-up ===== */
+[data-aos]{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+[data-aos].visible{opacity:1;transform:translateY(0)}
+</style>
 </head>
 <body>
 
-  <div class="noise"></div>
-
-  <nav class="navbar" id="navbar">
-    <div class="nav-inner">
-      <a href="#hero" class="logo">KM</a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="logo">KM</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#stats">Stats</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button id="darkToggle" aria-label="Toggle dark mode">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <section id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-content">
-      <div class="profile-img" data-aos="fade-up">
-        <img src="assets/profile.svg" alt="Klaire Manzano">
-      </div>
-      <h1 data-aos="fade-up" data-aos-delay="100">Hyacinth Klaire E. Manzano</h1>
-      <div class="hero-cta" data-aos="fade-up" data-aos-delay="300">
-        <a href="#projects" class="btn btn-primary">View My Work</a>
-        <a href="#contact" class="btn btn-outline">Get In Touch</a>
-      </div>
+<section id="hero">
+  <div class="grid-bg"></div>
+  <div class="hero-content">
+    <div class="avatar">KM</div>
+    <h1>Hyacinth Klaire E. Manzano</h1>
+    <p class="title">Data clerk</p>
+    <p class="tagline">Every record counts. Accuracy and efficiency drive everything I do.</p>
+    <div class="hero-btns">
+      <a href="resume.pdf" class="btn btn-primary">Download resume</a>
+      <a href="#contact" class="btn btn-outline">Contact</a>
     </div>
-    <div class="scroll-indicator">
-      <span></span>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <div class="section-divider"><svg viewBox="0 0 1440 100" preserveAspectRatio="none"><path d="M0,50 C360,100 1080,0 1440,50 L1440,100 L0,100 Z" fill="#111118"/></svg></div>
-
-  <section id="about">
-    <div class="container">
-      <h2 data-aos="fade-up">About Me</h2>
-      <div class="about-content" data-aos="fade-up" data-aos-delay="100">
-        <p>
-          I'm a dedicated professional who believes in the power of thoughtful work. Whether leading a team,
-          analyzing complex data, or crafting a compelling narrative, I bring curiosity, precision, and
-          a collaborative spirit to everything I do.
-        </p>
-        <p>
-          <em>Replace this with your real bio. Talk about your background, what drives you,
-          and what you're looking for next.</em>
-        </p>
+<section id="stats" class="alt">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card" data-aos>
+        <span class="stat-number" data-target="50000" data-suffix="+">0</span>
+        <span class="stat-label">records processed</span>
+      </div>
+      <div class="stat-card" data-aos data-aos-delay="100">
+        <span class="stat-number" data-target="99.8" data-suffix="%" data-decimals="1">0</span>
+        <span class="stat-label">accuracy rate</span>
+      </div>
+      <div class="stat-card" data-aos data-aos-delay="200">
+        <span class="stat-number" data-target="5" data-suffix="+">0</span>
+        <span class="stat-label">years of experience</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="section-divider flipped"><svg viewBox="0 0 1440 100" preserveAspectRatio="none"><path d="M0,50 C360,100 1080,0 1440,50 L1440,100 L0,100 Z" fill="#0a0a0f"/></svg></div>
-
-  <section id="skills">
-    <div class="container">
-      <h2 data-aos="fade-up">Skills &amp; Strengths</h2>
-      <div class="skills-grid" data-aos="fade-up" data-aos-delay="100">
-        <div class="skill-card">
-          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          <span>Leadership</span>
-        </div>
-        <div class="skill-card">
-          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-          <span>Communication</span>
-        </div>
-        <div class="skill-card">
-          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          <span>Strategic Planning</span>
-        </div>
-        <div class="skill-card">
-          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
-          <span>Problem Solving</span>
-        </div>
-        <div class="skill-card">
-          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-          <span>Project Management</span>
-        </div>
-        <div class="skill-card">
-          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-6.219-8.56"/><path d="M21 3v5h-5"/><path d="M21 3l-7.5 7.5"/></svg>
-          <span>Research &amp; Analysis</span>
-        </div>
-        <div class="skill-card">
-          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          <span>Collaboration</span>
-        </div>
-        <div class="skill-card">
-          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 100 4h4a2 2 0 110 4H8"/><path d="M12 18V6"/></svg>
-          <span>Data-driven Thinking</span>
-        </div>
-        <div class="skill-card">
-          <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          <span>Creative Direction</span>
-        </div>
+<section id="skills">
+  <div class="container">
+    <h2 data-aos>Skills</h2>
+    <div class="skills-grid" data-aos data-aos-delay="100">
+      <div class="skill-card">
+        <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        <span>Excel / sheets</span>
+      </div>
+      <div class="skill-card">
+        <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        <span>SQL / Access</span>
+      </div>
+      <div class="skill-card">
+        <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/><path d="M18 8h.01"/><path d="M8 12h.01"/><path d="M12 12h.01"/><path d="M16 12h.01"/><path d="M8 16h.01"/><path d="M12 16h.01"/><path d="M16 16h.01"/></svg>
+        <span>Typing speed — 80 wpm</span>
+      </div>
+      <div class="skill-card">
+        <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
+        <span>QA / audits</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="section-divider"><svg viewBox="0 0 1440 100" preserveAspectRatio="none"><path d="M0,50 C360,100 1080,0 1440,50 L1440,100 L0,100 Z" fill="#111118"/></svg></div>
-
-  <section id="projects">
-    <div class="container">
-      <h2 data-aos="fade-up">Featured Work</h2>
-      <div class="projects-grid">
-        <article class="project-card" data-aos="fade-up">
-          <div class="card-header">
-            <span class="project-number">01</span>
-            <h3>Community Impact Initiative</h3>
-          </div>
-          <p>Led a cross-functional team to design and implement a local outreach program serving over 200 participants, resulting in measurable community engagement and lasting partnerships.</p>
-          <div class="tags">
-            <span>Leadership</span><span>Program Management</span><span>Community</span>
-          </div>
-          <div class="card-links">
-            <a href="#" target="_blank">Case Study</a>
-          </div>
-        </article>
-
-        <article class="project-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="card-header">
-            <span class="project-number">02</span>
-            <h3>Data-Driven Research Project</h3>
-          </div>
-          <p>Conducted a comprehensive analysis of industry trends using qualitative and quantitative methods. Delivered actionable insights that informed strategic decision-making.</p>
-          <div class="tags">
-            <span>Research</span><span>Data Analysis</span><span>Strategy</span>
-          </div>
-          <div class="card-links">
-            <a href="#" target="_blank">View Report</a>
-          </div>
-        </article>
-
-        <article class="project-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="card-header">
-            <span class="project-number">03</span>
-            <h3>Creative Brand Project</h3>
-          </div>
-          <p>Developed a cohesive visual identity and messaging framework for a growing organization, unifying their presence across digital and print channels.</p>
-          <div class="tags">
-            <span>Design</span><span>Branding</span><span>Creative Strategy</span>
-          </div>
-          <div class="card-links">
-            <a href="#" target="_blank">View Portfolio</a>
-          </div>
-        </article>
+<section id="process" class="alt">
+  <div class="container">
+    <h2 data-aos>How I work</h2>
+    <div class="process-strip" data-aos>
+      <div class="step">
+        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-8l-2 3H8"/><path d="M2 12h4l2-3h4l2 3h4"/><path d="M22 12v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4"/></svg>
+        <span>Receive</span>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span>Verify</span>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+        <span>Enter</span>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <span>Audit</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="section-divider flipped"><svg viewBox="0 0 1440 100" preserveAspectRatio="none"><path d="M0,50 C360,100 1080,0 1440,50 L1440,100 L0,100 Z" fill="#0a0a0f"/></svg></div>
-
-  <section id="contact">
-    <div class="container">
-      <h2 data-aos="fade-up">Get In Touch</h2>
-      <p class="contact-intro" data-aos="fade-up" data-aos-delay="100">I'm always open to new opportunities and meaningful conversations.</p>
-      <div class="contact-links" data-aos="fade-up" data-aos-delay="200">
-        <a href="mailto:hello@klairemanzano.com" class="contact-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          hello@klairemanzano.com
-        </a>
-        <a href="https://github.com/klaireLK" target="_blank" class="contact-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          GitHub
-        </a>
-        <a href="https://linkedin.com/in/klairemanzano" target="_blank" class="contact-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          LinkedIn
-        </a>
-      </div>
+<section id="work">
+  <div class="container">
+    <h2 data-aos>Featured work</h2>
+    <div class="work-grid">
+      <article class="work-card" data-aos>
+        <h3>Inventory cleanup</h3>
+        <p>12,000 rows deduplicated and standardized across 3 source systems. Reduced discrepancies by 94% and cut lookup time in half.</p>
+        <div class="tags">
+          <span>Excel</span><span>data cleaning</span><span>deduplication</span>
+        </div>
+      </article>
+      <article class="work-card" data-aos data-aos-delay="100">
+        <h3>Monthly report dashboard</h3>
+        <p>Built recurring pivot-table summary that reduced report generation from 4 hours to 30 minutes. Used by the operations team weekly.</p>
+        <div class="tags">
+          <span>Excel</span><span>pivot tables</span><span>dashboard</span>
+        </div>
+      </article>
     </div>
-  </section>
+    <p style="text-align:center;margin-top:24px;font-size:.85rem;color:var(--text-muted)">Replace these with your real project details.</p>
+  </div>
+</section>
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2026 Hyacinth Klaire E. Manzano.</p>
+<section id="testimonial" class="alt">
+  <div class="container">
+    <blockquote data-aos>
+      <p>"Klaire is one of the most detail-oriented people I've worked with. Her accuracy rate is unmatched, and she consistently meets tight deadlines without compromising quality."</p>
+      <cite>
+        <strong>Jane Doe</strong>
+        <span>Supervisor, Data operations</span>
+      </cite>
+    </blockquote>
+    <p style="text-align:center;margin-top:24px;font-size:.85rem;color:var(--text-muted)">Replace with a real quote from a supervisor or colleague.</p>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="container">
+    <h2 data-aos>Certifications</h2>
+    <div class="cert-list" data-aos data-aos-delay="100">
+      <span class="cert-pill">Microsoft Office specialist</span>
+      <span class="cert-pill">Data entry — 80 wpm verified</span>
+      <span class="cert-pill">[Add certification]</span>
+      <span class="cert-pill">[Add certification]</span>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script src="js/main.js"></script>
+<section id="contact" class="alt">
+  <div class="container">
+    <h2 data-aos>Contact</h2>
+    <p class="contact-intro" data-aos data-aos-delay="100">Have a role that needs precision? Let's talk.</p>
+    <div class="contact-links" data-aos data-aos-delay="200">
+      <a href="mailto:hello@klairemanzano.com" class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        hello@klairemanzano.com
+      </a>
+      <a href="https://linkedin.com/in/klairemanzano" target="_blank" class="contact-item">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 Hyacinth Klaire E. Manzano.</p>
+  </div>
+</footer>
+
+<button id="darkToggleFab" aria-label="Toggle dark mode">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+</button>
+
+<script>
+(function(){
+  const hamburger=document.getElementById('hamburger');
+  const navLinks=document.getElementById('navLinks');
+  hamburger.addEventListener('click',()=>{
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('show');
+  });
+  document.querySelectorAll('.nav-links a').forEach(l=>{
+    l.addEventListener('click',()=>{
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('show');
+    });
+  });
+
+  const body=document.body;
+  const navDark=document.getElementById('darkToggle');
+  const fabDark=document.getElementById('darkToggleFab');
+  let dark=false;
+
+  function setDark(v){
+    dark=v;
+    body.classList.toggle('dark',dark);
+  }
+
+  function toggleDark(){
+    setDark(!dark);
+    updateIcons();
+  }
+
+  function updateIcons(){
+    const p=dark
+      ? '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>'
+      : '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+    [navDark,fabDark].forEach(b=>{if(b)b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>'});
+  }
+
+  [navDark,fabDark].forEach(b=>{if(b)b.addEventListener('click',toggleDark)});
+
+  const aosEls=document.querySelectorAll('[data-aos]');
+  const aosObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');aosObs.unobserve(e.target)}});
+  },{threshold:.15});
+  aosEls.forEach(el=>aosObs.observe(el));
+
+  const statNumbers=document.querySelectorAll('.stat-number');
+  const statObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting)return;
+      const el=e.target;
+      statObs.unobserve(el);
+      const target=parseFloat(el.dataset.target);
+      const suffix=el.dataset.suffix||'';
+      const decimals=parseInt(el.dataset.decimals)||0;
+      const duration=1500;
+      const start=performance.now();
+      function step(now){
+        const t=Math.min((now-start)/duration,1);
+        const eased=1-Math.pow(1-t,3);
+        const val=eased*target;
+        el.textContent=val.toFixed(decimals)+suffix;
+        if(t<1)requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  },{threshold:.4});
+  statNumbers.forEach(el=>statObs.observe(el));
+})();
+</script>
 </body>
 </html>
