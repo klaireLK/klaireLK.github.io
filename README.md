@@ -1,99 +1,97 @@
 # Portfolio — Hyacinth Klaire E. Manzano
 
-A clean, responsive personal portfolio website built with plain HTML, CSS, and JavaScript. Ready to deploy on GitHub Pages in one click.
+A modern, responsive personal portfolio built with plain HTML, CSS, and JavaScript. Lightweight, zero dependencies, ready for GitHub Pages.
 
 ## Project Structure
 
 ```
-├── index.html          # All page content (hero, about, skills, projects, contact)
+├── index.html           # All page content
 ├── css/
-│   └── style.css       # All styles — colors, layout, responsive
+│   └── style.css        # Animated gradient hero, glass cards, responsive grid
 ├── js/
-│   └── main.js         # Mobile menu toggle & smooth scrolling
+│   └── main.js          # Mobile menu, scroll-triggered fade-in animations
 ├── assets/
-│   └── profile.jpg     # Replace with your photo
+│   └── profile.svg      # Replace with your photo (square works best)
+├── docs/                # Design documentation
 └── README.md
 ```
 
+## What's Inside
+
+- **Animated gradient hero** with floating profile photo
+- **Glass-morphism cards** for skills and projects
+- **Scroll-triggered fade-in animations** via IntersectionObserver
+- **SVG section dividers** for visual flow between sections
+- **Fully responsive** — mobile, tablet, desktop
+- **Single Google Font** (Inter) — clean, professional, fast
+
 ## Customization Guide
 
-### 1. Replace your name & tagline
-Open `index.html`. Find these lines near the top of `<section id="hero">`:
+### 1. Your name & tagline
+`index.html` → `<section id="hero">`:
+- Line ~61: `<h1>` — your name
+- Line ~64: `<p class="tagline">` — short professional tagline
 
-- **Line ~64:** `<h1>Hyacinth Klaire E. Manzano</h1>` — your name
-- **Line ~65:** Tagline inside the `<p class="tagline">` element
+### 2. Bio
+`index.html` → `<section id="about">` — replace the two paragraphs.
 
-### 2. Replace the About bio
-In `index.html`, find `<section id="about">`. Replace the two `<p>` paragraphs with your real bio.
+### 3. Skills
+`index.html` → `<section id="skills">` — each `.skill-card` is one skill. Rename, add, or remove them. Each includes an inline SVG icon (swap icons by replacing the `<svg>` inside each card).
 
-### 3. Replace skills
-In `index.html`, find `<section id="skills">`. Each `<div class="skill-card"><span>...</span></div>` is one skill. Add, remove, or rename them.
+### 4. Projects
+`index.html` → `<section id="projects">` — each `.project-card` is one project. Update title, description, tags, and links.
 
-### 4. Replace projects
-In `index.html`, find `<section id="projects">`. Each `<article class="project-card">` is one project. Update the title, description, tags, and links. To add more, copy an entire `<article>` block.
+### 5. Contact
+`index.html` → `<section id="contact">` — update email, GitHub, and LinkedIn URLs.
 
-### 5. Replace contact info
-In `index.html`, find `<section id="contact">`. Update the email address and social links.
+### 6. Profile photo
+Replace `assets/profile.svg` with your actual photo (square, preferably 300×300px). Update the `<img src>` path in `index.html` if you change the filename.
 
-### 6. Replace profile photo
-Replace `assets/profile.jpg` with your own photo (square works best). Keep the same filename or update the `<img src>` path in `index.html`.
-
-### 7. Customize colors
-Open `css/style.css`. The `:root` section at the top defines all colors:
-
+### 7. Colors
+Open `css/style.css` — the `:root` section defines the palette:
 ```css
---bg-primary: #1a1a2e;    /* main background */
---bg-secondary: #16213e;  /* alternate section background */
---accent: #00b4d8;        /* accent color (links, borders) */
---accent-hover: #0090b0;  /* accent hover state */
---text: #e0e0e0;          /* body text */
---text-light: #a0a0b0;   /* muted text */
+--bg: #0a0a0f;           /* dark background */
+--bg-alt: #111118;       /* alternate section background */
+--accent-1: #8B5CF6;     /* purple accent */
+--accent-2: #EC4899;     /* pink accent */
+--text: #e8e8f0;         /* body text */
+--text-muted: #7878a0;   /* muted text */
 ```
 
 ## Run Locally
 
-Because this is plain HTML/CSS/JS, you can open it directly:
-
-1. Double-click `index.html` — it opens in your browser.
-
-Or serve it with any static server (optional):
+Simply open `index.html` in your browser. Or serve with any static server:
 
 ```bash
 # Python 3
 python -m http.server 8000
 
-# Node (requires npx)
+# Node (optional)
 npx serve .
 ```
 
-Then open `http://localhost:8000` in your browser.
+Then visit `http://localhost:8000`.
 
 ## Deploy to GitHub Pages
 
-This repo is already set up as a GitHub Pages site (`klaireLK.github.io`). To deploy:
-
-1. Push this code to the `main` branch of your GitHub repo:
-
+1. Push to `main`:
 ```bash
 git add .
-git commit -m "Initial portfolio"
+git commit -m "Update portfolio"
 git push origin main
 ```
 
-2. Go to your repo on GitHub: `https://github.com/klaireLK/klaireLK.github.io`
+2. Go to your repo → **Settings** → **Pages**
 
-3. Click **Settings** → **Pages** (in the left sidebar).
+3. Set **Source** to **Deploy from a branch**, **Branch** to `main`, **folder** to `/ (root)`, and click **Save**.
 
-4. Under **Source**, select **Deploy from a branch**.
+4. Wait ~2 minutes, then visit `https://klaireLK.github.io`.
 
-5. Set **Branch** to `main` and folder to `/ (root)`.
+Any push to `main` auto-deploys.
 
-6. Click **Save**.
+## Design Decisions
 
-7. Wait 1–2 minutes, then visit `https://klaireLK.github.io` — your site is live.
-
-Any future push to `main` will automatically redeploy.
-
-## License
-
-MIT
+- **Plain HTML/CSS/JS** chosen over Jekyll/Astro for zero build step and easiest editing
+- **Single-page scroll** avoids layout duplication and feels smooth
+- **Content kept general** — skills and projects are placeholders for any profession
+- **One Google Font import** (Inter) to keep load fast while improving typography
